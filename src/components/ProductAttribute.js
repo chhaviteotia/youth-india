@@ -11,6 +11,7 @@ const ProductAttribute = () => {
         setData(res.data)
     })
 },[])
+// search functionality
 const [value,setValue] = useState('')
 const onChange=(e)=>{
   setValue(e.target.value)

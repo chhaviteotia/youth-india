@@ -58,3 +58,10 @@
    padding: 10px 10px;
    margin: 10px 10px
  }
+
+ .pagination{
+  display: flex;
+ }
+ .list-item{
+  margin: 10px 10px;
+ }
