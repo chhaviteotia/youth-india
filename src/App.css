@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+.card-container{
+  border: 2px solid black;
+  padding: 10px 10px;
+  margin: 10px 10px
+}
+.popuphidden{
+  display: none;
+}
+.popup{
+ border: 2px solid black;
+  padding: 10px 10px;
+  margin: 10px 10px
+}
+.card-hidden{
+  display: none;
+}
+
+.product-card{
+  border: 2px solid blue;
+   padding: 10px 10px;
+   margin: 10px 10px
+ }

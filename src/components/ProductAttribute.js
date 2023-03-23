@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../App.css';
 
 const ProductAttribute = () => {
   const [data, setData] = useState([]);
@@ -10,42 +11,52 @@ const ProductAttribute = () => {
         setData(res.data)
     })
 },[])
-const [value,setValue] = useState(' ')
+const [value,setValue] = useState('')
 const onChange=(e)=>{
   setValue(e.target.value)
 }
-const [first,setFirst] = useState(' ')
-const [last,setLast] = useState(' ')
-const [email,setEmail] = useState(' ')
+const [cardContainer,setCardContainer] = useState('card-container')
+const [popup,setPopup] = useState('popuphidde')
+const [first,setFirst] = useState('')
 const onSearch = (search)=>{
  for (let item in data){
   if(data[item].first_name===search){
     console.log("first")
-    setFirst(data[item].first_name)
-    setEmail(data[item].email)
-    setLast(data[item].last_name)
-  }else{
-    // console.log((data[item].first_name))
-    console.log(data[item].first_name===search)
+    setFirst(data[item])
+    setPopup('popup')
+    setCardContainer('card-hidden')
   }
  }
 }
-console.log(first,last,email)
+
+const ChangeClass = ()=>{
+  setPopup('popuphidden')
+  setCardContainer('card-container')
+}
+
+console.log(first)
   return (
     <div>
     <input value={value} onChange={onChange} placeholder='search here'/><button onClick={()=>onSearch(value)}>Search</button>
+    
     {
       data.map(item=>{
         return(
-          <div>
-            <p>name: {item.first_name} {item.last_name}</p>
+          <div className={cardContainer}>
+            <p>Name: {item.first_name} {item.last_name}</p>
             <p>Email: {item.email}</p>
           </div>
         )
       })
     }
-      
+    <button onClick={ChangeClass} className="close-button">
+    X
+  </button>
+    <div className={popup}>
+    <p>Name: {first.first_name} {first.last_name}</p>
+    <p>Email: {first.email}</p>
     </div>
+  </div>  
   )
 }
 

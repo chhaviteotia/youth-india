@@ -3,8 +3,6 @@ import axios from 'axios';
 
 function Product() {
   const [data, setData] = useState([]);
-  const [search, setSearch] = useState([]);
-  console.log(search)
 //   const [currentPage, setCurrentPage] = useState(1);
 //   const [itemsPerPage, setItemsPerPage] = useState(10);
 // const fetchData = async () => {
@@ -16,15 +14,18 @@ function Product() {
   
 useEffect(() => {
 
-    axios.get(`https://random-data-api.com/api/v2/users?size=65`, {
+    axios.get(`https://random-data-api.com/api/v2/users?size=64`, {
     }).then(res => {
-
         setData(res.data)
-
     })
 },[])
+const [currentPage, setCurrentPage] =useState(1)
+  const [postsPerPage, setPostPerPage] =useState(8)
+  const lastPostIndex =currentPage * postsPerPage
+  const firstPostIndex = lastPostIndex - postsPerPage
+  const currentPosts = data.slice(firstPostIndex,lastPostIndex)
+  const number = (data.length-1)/postsPerPage;
 
-console.log(data)
 // const handlePageChange = (pageNumber) => {
 //     setCurrentPage(pageNumber);
 //   }
@@ -39,18 +40,27 @@ console.log(data)
 //     ));
 //   }
 
+
+  var elements = [];
+  for(let i =1; i < number+1; i++){
+      elements.push(<p className="list-item">{i}</p>);
+  }
+
    return(
     <div>
       {
-        data.map(item=>{
+        currentPosts.map(item=>{
           return(
-            <div>
+            <div className='product-card'>
               <p>{item.username}</p>
               <img src={item.avatar} alt={item.id}></img>
             </div>
           )
         })
       }
+      <div>
+      {elements}
+      </div>
     </div>
   )
 }
